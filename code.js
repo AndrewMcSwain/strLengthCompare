@@ -11,11 +11,11 @@ strLengthCompare(str){
        var array[i] = [];
        var isSpace = /s/.test(character);
        if (isSpace === true){
-	 piece = str.slice(lastClipIndex, character);
+	 piece = str.slice(lastClipIndex, i-1);
 	 pieceLength = piece.length;
 	 array[i].push(piece);
 	 array[i].push(pieceLength);
-	 lastClipIndex = character;
+	 lastClipIndex = i;
       }
     }
     return array;
@@ -23,7 +23,6 @@ strLengthCompare(str){
      
   function compareStrings(){
     var arrayLength = array.length;
-    var arrayLengthPrev = 0;
     var currentChampion = 
       {
       name : "",
@@ -33,13 +32,14 @@ strLengthCompare(str){
 	
     var announce = "The current champion is " + currentChampion.name + " with a length of " + currentChampion.length + "."; 
 
+    var arrayLengthPrev = 0;
     for(i = 0; i < arrayLength; i++){
-      var arrayLengthCurrent = array[i][2];
+      var arrayLengthCurrent = array[i][1];
       if(arrayLengthCurrent > arrayLengthPrev){
 	currentChampion.index = array[i];
-	currentChampion.length = array[i][2];
-	currentChampion.name = array[i][1];
-	arrayLengthPrev = array[1][2];  
+	currentChampion.length = array[i][1];
+	currentChampion.name = array[i][0];
+	arrayLengthPrev = array[i][1];  
       }
       return announce;
     }
